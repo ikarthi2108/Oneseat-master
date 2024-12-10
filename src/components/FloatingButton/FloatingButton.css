@@ -1,0 +1,30 @@
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff5722, #e64a19);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .floating-button:hover {
+    background: linear-gradient(45deg, #e64a19, #ff5722);
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 650px) {
+    .floating-button {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  }
+  

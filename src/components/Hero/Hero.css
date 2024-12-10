@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #f9f9f9; /* Fallback background color */
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover; 
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-image.visible {
+  opacity: 1;
+}
+
+.hero-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Black transparent overlay */
+  z-index: 1; /* Ensure it overlays the image */
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2; /* Above the image and overlay */
+  max-width: 800px;
+  padding: 20px;
+  margin-right: 10%; /* Positions the text from the right */
+  text-align: right;
+  color: #fff; /* Text color changed to white for better contrast */
+}
+
+.hero-text h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #fff; /* White text for better visibility */
+  margin-bottom: 20px;
+  line-height: 1.2;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.hero-text p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #f0f0f0; /* Lighter text color for contrast */
+  margin-bottom: 20px;
+}
+
+.hero-text .btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(45deg, #1e88e5, #1976d2);
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-text .btn:hover {
+  background: linear-gradient(45deg, #1976d2, #1e88e5);
+  transform: scale(1.05);
+}
+
+.hero-text .btn img {
+  width: 20px;
+  height: auto;
+  margin-left: 8px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 850px) {
+  .hero-text {
+    margin-right: 5%;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .hero-text {
+    margin-right: 2%;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+
+  .hero-image {
+    background-position: top; /* Adjust image alignment for smaller screens */
+  }
+}

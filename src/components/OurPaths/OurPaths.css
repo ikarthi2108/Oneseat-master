@@ -1,0 +1,69 @@
+/* Import custom font */
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux&display=swap');
+
+/* Apply the font globally */
+body {
+  font-family: 'Afacad Flux', sans-serif;
+}
+
+/* Style for the content box */
+.content-box {
+  border: 2px solid #007bff;
+  border-radius: 0; /* No border-radius */
+  background-color: #f1f9ff;
+  min-height: 200px;
+  font-size: 18px;
+  color: #333;
+  box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.5s ease-in-out;
+}
+
+.content-box:hover {
+  background-color: #e7f1ff;
+}
+
+/* Custom button styles */
+.btn-custom {
+  background-color: #ff5722 !important;
+  color: #111;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 0 !important; /* Removed border-radius */
+  border: 2px solid #007bff;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Active button styling */
+.btn.active {
+  background-color: #0056b3;
+  color: white;
+  border-color: #004085;
+  box-shadow: 0 5px 15px rgba(0, 86, 179, 0.4);
+}
+
+
+.custom-container{
+    background-color: #f0f2f3 !important;
+}
+
+/* Button hover effect */
+.btn-custom:hover {
+  background-color: #0056b3;
+  color: #20145f;
+  border-color: #004085;
+  text-shadow: none;
+  box-shadow: 0 5px 15px rgba(0, 86, 179, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-box {
+    font-size: 16px;
+  }
+
+  .btn-group-vertical {
+    margin-bottom: 20px;
+  }
+}

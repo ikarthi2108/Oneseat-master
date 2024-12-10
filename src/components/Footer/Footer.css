@@ -1,0 +1,197 @@
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    outline: none;
+}
+
+a,
+a:active,
+a:focus {
+    color: #6f6f6f;
+    text-decoration: none;
+    transition-timing-function: ease-in-out;
+    transition-duration: .2s;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.footer-container {
+    background-color: #233243;
+    position: relative;
+    overflow: hidden;
+    z-index: 9;
+}
+
+.footer-container:before {
+    content: '';
+    position: absolute;
+    top: -146%;
+    left: -18%;
+    width: 44%;
+    height: 257%;
+    transform: rotate(54deg);
+    background-color: rgb(31, 47, 64);
+    z-index: -10;
+}
+
+.footer-container:after {
+    position: absolute;
+    content: '';
+    background-color: rgb(31, 47, 64);
+    top: -24%;
+    right: 4%;
+    width: 26%;
+    height: 264%;
+    transform: rotate(44deg);
+    z-index: -10;
+}
+
+.footer-header {
+    padding-top: 96px;
+    padding-bottom: 50px;
+}
+
+.footer-header p,
+.contact-info-list li {
+    color: #ffffff;
+}
+
+.contact-info-list {
+    margin-top: 10px;
+}
+
+.contact-info-list li {
+    position: relative; /* Set position relative for absolute positioning of icon */
+    display: flex;
+    align-items: center; /* Align items vertically */
+    padding-left: 30px; /* Add padding to avoid text overlap with icon */
+}
+
+.icon-container {
+    position: absolute; /* Position the icon absolutely */
+    left: 0; /* Place the icon to the left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    font-size: 20px; /* Set icon size */
+    color: #0daade; /* Set icon color to match theme */
+}
+
+.footer-header .logo-link {
+    margin-bottom: 25px;
+    display: block;
+    max-width: 170px;
+}
+
+.widget-title {
+    text-transform: capitalize;
+}
+
+.footer-header .widget-title {
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.course-links li + li {
+    margin-top: 10px;
+}
+
+.course-links li a {
+    color: #ffffff;
+    text-transform: capitalize;
+    font-family: var(--para-font);
+    font-weight: 400;
+}
+
+.course-links li a:hover {
+    color: #ffb606;
+}
+
+.footer-header .news-title a {
+    font-family: var(--para-font);
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.news-item .news-date {
+    color: #ffb606;
+    margin-bottom: 3px;
+    font-family: var(--para-font);
+    font-weight: 400;
+}
+
+.news-list li + li {
+    margin-top: 30px;
+}
+
+.newsletter-form {
+    margin-top: 15px;
+}
+
+.newsletter-form input {
+    width: 100%;
+    padding: 12px 25px;
+    border-radius: 5px;
+    border: none;
+}
+
+.newsletter-form input[type="submit"] {
+    width: auto;
+    border: none;
+    background-color: #0daade;
+    padding: 9px 30px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.footer-footer {
+    padding: 13px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.149);
+}
+
+.copyright-text {
+    color: #ffffff;
+}
+
+.copyright-text a {
+    color: #ffb606;
+}
+
+.terms-privacy-list li + li {
+    margin-left: 30px;
+}
+
+.terms-privacy-list li a {
+    color: #ffffff;
+    position: relative;
+}
+
+.terms-privacy-list li a:after {
+    position: absolute;
+    content: '-';
+    color: #ffffff;
+    display: inline-block;
+    top: 0;
+    right: -18px;
+}
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+  }
+.terms-privacy-list li + li a:after {
+    display: none;
+}

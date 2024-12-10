@@ -1,0 +1,33 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Apply the Poppins font to the whole container */
+.main-container {
+  padding: 40px 0;
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+}
+
+.counter-section {
+  margin: 0 30px; /* Adjust this value to increase or decrease spacing */
+  padding: 20px; /* Optional: padding inside each section */
+}
+
+.counter-image {
+  width: 100px; /* Adjust image size if needed */
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-weight: 600; /* Make the heading bolder */
+}
+
+p {
+  font-weight: 400; /* Regular weight for paragraph text */
+}
+
+@media (max-width: 768px) {
+  .counter-section {
+    margin: 20px 0; /* Adjust for smaller screens */
+  }
+}

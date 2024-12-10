@@ -1,0 +1,64 @@
+/* Progress bar container */
+.progress-wrapper {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Step container */
+.step-container {
+  flex: 1;
+  position: relative;
+}
+
+/* Step styling */
+.step {
+  background-color: transparent;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+/* Line connecting the steps */
+.line {
+  height: 5px;
+  background-color: #4CAF50;
+  flex-grow: 1;
+  margin: 0 10px;
+  z-index: 0;
+}
+
+/* Active step */
+.step.active {
+  color: #4CAF50;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  background-color: #4caf501a;
+  border: 1px solid #4CAF50;
+}
+
+/* Hover effect for inactive steps */
+.step:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+  .progress-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .line {
+    height: 2px; /* Thinner line for small screens */
+  }
+
+  .step-container {
+    margin-bottom: 10px; /* Add spacing between steps in vertical layout */
+  }
+}

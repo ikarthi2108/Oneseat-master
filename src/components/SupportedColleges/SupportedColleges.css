@@ -1,0 +1,104 @@
+.supported-colleges-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+/* Background Video */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* College Container */
+.college-container {
+  padding-top: 3rem;
+}
+
+/* Heading Style */
+.college-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* Filter Buttons */
+.filter-btn {
+  background-color: #017c74;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #015c4c;
+}
+
+.filter-btn.active {
+  background-color: #015c4c;
+}
+
+/* College Card */
+.college-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.college-card:hover {
+  transform: scale(1.05);
+}
+
+.college-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card-location {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Modal Styles */
+.modal-content {
+  background-color: #f4f4f4;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-item {
+  display: inline-block;
+  padding: 0 1rem;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

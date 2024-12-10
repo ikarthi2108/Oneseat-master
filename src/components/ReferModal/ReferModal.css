@@ -1,0 +1,56 @@
+/* Unique styling for ReferModal */
+.refer-modal {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .refer-modal-header {
+    background-color: #004d99;
+    color: white;
+    border-bottom: 2px solid #00284d;
+  }
+  
+  .refer-modal-title {
+    font-weight: 600;
+  }
+  
+  .refer-modal-body {
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .refer-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .refer-modal-grid .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .refer-modal-submit-btn {
+    width: 100%;
+    background-color: #004d99;
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .refer-modal-submit-btn:hover {
+    background-color: #003366;
+  }
+  
+  .refer-modal-submit-btn:disabled {
+    background-color: #cccccc;
+  }
+  .refer-modal-header .btn-close {
+    background-color: transparent;
+    filter: invert(1);
+    border: none;
+    outline: none;
+  }

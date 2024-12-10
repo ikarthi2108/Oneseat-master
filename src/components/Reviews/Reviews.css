@@ -1,0 +1,61 @@
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hide hover text initially */
+.card-hover-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Show hover text on hover */
+.img-container:hover .card-hover-text {
+  opacity: 1;
+}
+
+/* Ensure the images take full width */
+.card-img-top {
+  width: 100%;
+  height: auto;
+  opacity: 0.6; /* Adjust opacity if you want a slightly faded image effect */
+  position: relative;
+  z-index: 1; /* Ensures the image is above the shadow */
+}
+
+.card-img-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%; /* Adjust the height of the blue shadow */
+  background: rgba(0, 123, 255, 0.5); /* Blue shadow effect */
+  z-index: -1; /* Ensures the shadow appears behind the image */
+  box-shadow: 0 -10px 20px rgba(0, 123, 255, 0.5); /* Blue shadow glow */
+}
+
+/* Adjust card-body padding and text alignment */
+.card-body {
+  text-align: center;
+}
+
+/* Responsive behavior */
+@media (max-width: 576px) {
+  .card-hover-text {
+    font-size: 14px;
+  }
+} 
