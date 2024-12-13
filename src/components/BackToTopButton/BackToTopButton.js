@@ -1,12 +1,12 @@
+// BackToTopButton.js
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons"; // Import the arrow-up icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import "./BackToTopButton.css";
 
 const BackToTopButton = () => {
   const [showButton, setShowButton] = useState(false);
 
-  // Show button when scrolled beyond a certain point
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -20,7 +20,6 @@ const BackToTopButton = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll smoothly to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -29,11 +28,17 @@ const BackToTopButton = () => {
   };
 
   return (
-    showButton && (
-      <div className="back-to-top-button" onClick={scrollToTop}>
-        <FontAwesomeIcon icon={faArrowUp} size="lg" />
+    <>
+      <div className={`offer-banner ${!showButton ? "full-width-banner" : ""}`}>
+        <span className="offer-text">🎉 25% Off on New Consultation! 🎉</span>
       </div>
-    )
+
+      {showButton && (
+        <div className="back-to-top-button" onClick={scrollToTop}>
+          <FontAwesomeIcon icon={faArrowUp} size="lg" />
+        </div>
+      )}
+    </>
   );
 };
 

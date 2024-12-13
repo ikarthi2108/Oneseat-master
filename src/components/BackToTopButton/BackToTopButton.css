@@ -1,35 +1,108 @@
+/* BackToTopButton.css */
+
+/* General Styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Back to Top Button Styles */
 .back-to-top-button {
-    position: fixed;
-    bottom: 20px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #004d99;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  animation: bounce 1.5s infinite;
+  transition: background-color 0.3s ease, transform 0.2s;
+  z-index: 1001;
+}
+
+.back-to-top-button:hover {
+  background-color: #003366;
+  transform: scale(1.1);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Offer Banner Styles */
+.offer-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 90px;
+  background-color: #ff6600;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: fade-in 1s ease-out;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+.full-width-banner {
+  left: 20px;
+}
+
+.offer-text {
+  margin: 0;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .offer-banner {
     left: 20px;
-    background-color: #004d99;
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    z-index: 1000;
-    animation: move-up 2s infinite;
-    transition: background-color 0.3s ease;
+    bottom: 70px;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
   }
-  
-  .back-to-top-button:hover {
-    background-color: #003366;
+
+  .back-to-top-button {
+    width: 40px;
+    height: 40px;
   }
-  
-  @keyframes move-up {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0);
-    }
+}
+
+@media (max-width: 480px) {
+  .offer-banner {
+    left: 20px;
+    bottom: 60px;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 5px;
   }
-  
+
+  .back-to-top-button {
+    width: 35px;
+    height: 35px;
+  }
+}
