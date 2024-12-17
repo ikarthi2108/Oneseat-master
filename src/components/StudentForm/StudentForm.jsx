@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import './StudentForm.css';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import emailjs from 'emailjs-com';
-import { formDataInitial, districts, colleges, twelfthGroups } from '../Hero/formData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { formDataInitial, districts, colleges, twelfthGroups } from '../Hero/formData';
 
 const StudentForm = () => {
-  // Ensure feesRange is initialized to an empty string
-  const [formData, setFormData] = useState({ ...formDataInitial, feesRange: '' });
+  const [formData, setFormData] = useState({ ...formDataInitial, feesRange: '', preferredCourse2: '', preferredCollege2: '' });
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -19,29 +18,58 @@ const StudentForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { tenthSchool, twelfthSchool, twelfthGroup, preferredCourse1, preferredCollege1 } = formData;
+    const {
+      tenthSchool,
+      twelfthSchool,
+      twelfthGroup,
+      preferredCourse1,
+      preferredCollege1,
+      email,
+      name,
+    } = formData;
 
     // Check for mandatory fields
     if (!tenthSchool || !twelfthSchool || !twelfthGroup || !preferredCourse1 || !preferredCollege1 || !formData.feesRange) {
-      toast.error('All fields are mandatory!', );
+      toast.error('All fields are mandatory!');
       setLoading(false);
       return;
     }
 
-    const emailParams = {
-      from_name: formData.name,
+    // Parameters for the admin email
+    const adminEmailParams = {
+      from_name: name,
       ...formData,
-      reply_to: formData.email,
+      reply_to: email,
     };
 
-    emailjs.send('service_uhgnfcc', 'template_yll0hkf', emailParams, 'wPCxvoMnXXj_VMZfl')
+    // Send email to Admin
+    emailjs
+      .send('service_uhgnfcc', 'template_yll0hkf', adminEmailParams, 'wPCxvoMnXXj_VMZfl')
       .then(() => {
-        toast.success('Thank you! We have received your details. We will get back to you shortly.',);
-        // Reset form fields after successful submission
-        setFormData({ ...formDataInitial, feesRange: '' });
+        toast.success('Thank you! We have received your details.');
+
+        // Parameters for the user confirmation email
+        const userEmailParams = {
+          to_email: email, // Send email to user's email
+          name: name, // Include user name
+          message: `Hello ${name},\n\nThank you for submitting your details to WayedEd. Our team will get back to you shortly.`,
+        };
+
+        // Send confirmation email to User
+        emailjs
+          .send('service_uhgnfcc', 'template_ii79ydn', userEmailParams, 'wPCxvoMnXXj_VMZfl')
+          .then(() => {
+            toast.success('A confirmation email has been sent to your email.');
+            setFormData({ ...formDataInitial, feesRange: '', preferredCourse2: '', preferredCollege2: '' }); // Reset form fields
+          })
+          .catch((error) => {
+            console.error('Error sending confirmation email:', error);
+            toast.error('Error sending confirmation email to user!');
+          });
       })
-      .catch(() => {
-        toast.error('Error sending email!', { position: toast.POSITION.TOP_CENTER });
+      .catch((error) => {
+        console.error('Error sending admin email:', error);
+        toast.error('Error sending email to admin!');
       })
       .finally(() => {
         setLoading(false);
@@ -83,7 +111,6 @@ const StudentForm = () => {
                 name="fatherName"
                 value={formData.fatherName}
                 onChange={handleChange}
-                
               />
             </Form.Group>
             <Form.Group>
@@ -105,7 +132,9 @@ const StudentForm = () => {
               >
                 <option value="" disabled>Select District</option>
                 {districts.map((district, index) => (
-                  <option key={index} value={district}>{district}</option>
+                  <option key={index} value={district}>
+                    {district}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -166,7 +195,9 @@ const StudentForm = () => {
               >
                 <option value="" disabled>Select Group</option>
                 {twelfthGroups.map((group, index) => (
-                  <option key={index} value={group}>{group}</option>
+                  <option key={index} value={group}>
+                    {group}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -180,15 +211,6 @@ const StudentForm = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Preferred Course 2</Form.Label>
-              <Form.Control
-                type="text"
-                name="preferredCourse2"
-                value={formData.preferredCourse2}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group>
               <Form.Label>Preferred College 1</Form.Label>
               <Form.Control
                 as="select"
@@ -198,9 +220,20 @@ const StudentForm = () => {
               >
                 <option value="" disabled>Select College</option>
                 {colleges.map((college, index) => (
-                  <option key={index} value={college}>{college}</option>
+                  <option key={index} value={college}>
+                    {college}
+                  </option>
                 ))}
               </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Preferred Course 2</Form.Label>
+              <Form.Control
+                type="text"
+                name="preferredCourse2"
+                value={formData.preferredCourse2}
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Preferred College 2</Form.Label>
@@ -209,11 +242,12 @@ const StudentForm = () => {
                 name="preferredCollege2"
                 value={formData.preferredCollege2}
                 onChange={handleChange}
-                disabled={!formData.preferredCollege1}
               >
                 <option value="" disabled>Select College</option>
-                {colleges.filter(college => college !== formData.preferredCollege1).map((college, index) => (
-                  <option key={index} value={college}>{college}</option>
+                {colleges.map((college, index) => (
+                  <option key={index} value={college}>
+                    {college}
+                  </option>
                 ))}
               </Form.Control>
             </Form.Group>
