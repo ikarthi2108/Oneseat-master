@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 import "./Hero.css";
 import dark_arrow from "../../assets/dark-arrow.png";
 import bg01 from "../../assets/Hero-bg1.jpg";
@@ -20,9 +20,13 @@ const Hero = () => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(false);
-  const [showModal, setShowModal] = useState(true); // Initially show modal
-  const [isSubmitting, setIsSubmitting] = useState(false); // State for loader
+  const [showModal, setShowModal] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
+    fullName: "",
+    mobileNumber: "",
+  });
+  const [errors, setErrors] = useState({
     fullName: "",
     mobileNumber: "",
   });
@@ -30,7 +34,7 @@ const Hero = () => {
   useEffect(() => {
     const detailsEntered = localStorage.getItem("isDetailsEntered");
     if (detailsEntered === "true") {
-      setShowModal(false); // Don't show the modal if details were entered
+      setShowModal(false);
     }
 
     const interval = setInterval(() => {
@@ -46,12 +50,53 @@ const Hero = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "mobileNumber") {
+      if (!/^\d{0,10}$/.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          mobileNumber: "Enter up to 10 numbers only",
+        }));
+      } else if (value.length === 10) {
+        setErrors((prev) => ({
+          ...prev,
+          mobileNumber: "",
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          mobileNumber: "Mobile number must be exactly 10 digits.",
+        }));
+      }
+    }
+
+    if (name === "fullName") {
+      if (!/^[a-zA-Z ]*$/.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          fullName: "Only alphabets are allowed",
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          fullName: "",
+        }));
+      }
+    }
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // Show loader
+
+    // Ensure no error exists before submitting
+    if (errors.fullName || errors.mobileNumber || formData.mobileNumber.length !== 10) {
+      toast.error("Please fix the errors before submitting.");
+      return;
+    }
+
+    setIsSubmitting(true);
 
     const templateParams = {
       fullName: formData.fullName,
@@ -66,37 +111,20 @@ const Hero = () => {
         "5H2BJZTgAqjNdCBMz"
       );
       toast.success("Details sent successfully!");
-      setShowModal(false); // Close modal on success
-      setFormData({ fullName: "", mobileNumber: "" }); // Reset form data
+      setShowModal(false);
+      setFormData({ fullName: "", mobileNumber: "" });
 
-      // Store the flag in localStorage
       localStorage.setItem("isDetailsEntered", "true");
     } catch (error) {
       toast.error("Failed to send details. Please try again.");
       console.error(error);
     } finally {
-      setIsSubmitting(false); // Hide loader
+      setIsSubmitting(false);
     }
   };
 
   const handleExploreNowClick = () => {
-    navigate("/supportedcolleges"); // Navigate to the supported colleges page
-  };
-
-  // Animation Variants
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1 } },
-  };
-
-  const slideUp = {
-    hidden: { y: 50, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 1 } },
-  };
-
-  const zoomIn = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { duration: 1 } },
+    navigate("/supportedcolleges");
   };
 
   return (
@@ -110,17 +138,11 @@ const Hero = () => {
           style={{
             backgroundImage: `url(${image.url})`,
           }}
-          initial="hidden"
-          animate={index === currentImageIndex ? "visible" : "hidden"}
-          variants={fadeIn}
-        ></motion.div>
+        />
       ))}
 
       <motion.div
         className={`hero-text ${fade ? "fade" : ""}`}
-        initial="hidden"
-        animate="visible"
-        variants={slideUp}
       >
         <h1 className="desktop-heading">{images[currentImageIndex].quote}</h1>
         <p className="desktop-paragraph">
@@ -129,7 +151,6 @@ const Hero = () => {
         <motion.div
           className="btn btn-primary"
           onClick={handleExploreNowClick}
-          variants={zoomIn}
           whileHover={{ scale: 1.1 }}
         >
           Explore Now <img src={dark_arrow} alt="arrow icon" />
@@ -137,59 +158,46 @@ const Hero = () => {
       </motion.div>
 
       {showModal && (
-        <motion.div
-          className="modal show"
-          style={{ display: "block" }}
-          tabIndex="-1"
-          initial="hidden"
-          animate="visible"
-          variants={zoomIn}
-        >
+        <motion.div className="modal show" style={{ display: "block" }}>
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Enter Your Details</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  disabled // Disable the close button
-                  aria-label="Close"
-                ></button>
               </div>
               <div className="modal-body">
-                <motion.form onSubmit={handleSubmit} variants={fadeIn}>
+                <motion.form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="fullName" className="form-label">
-                      Full Name
-                    </label>
+                    <label className="form-label">Full Name</label>
                     <input
                       type="text"
                       className="form-control"
-                      id="fullName"
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
                       required
                     />
+                    {errors.fullName && (
+                      <div className="text-danger">{errors.fullName}</div>
+                    )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="mobileNumber" className="form-label">
-                      Mobile Number
-                    </label>
+                    <label className="form-label">Mobile Number</label>
                     <input
                       type="text"
                       className="form-control"
-                      id="mobileNumber"
                       name="mobileNumber"
                       value={formData.mobileNumber}
                       onChange={handleInputChange}
                       required
                     />
+                    {errors.mobileNumber && (
+                      <div className="text-danger">{errors.mobileNumber}</div>
+                    )}
                   </div>
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    disabled={isSubmitting} // Disable while submitting
+                    disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <span className="spinner-border spinner-border-sm"></span>
